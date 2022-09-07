@@ -1,4 +1,4 @@
-<%=link_to 'Discover more movies', "/users/#{@user.id}/discover"%>
+<%=link_to 'Discover more movies', "/discover"%>
 
 <% if params[:top] == "top_rated" %>
   <h1>Top Rated Movies</h1>
@@ -8,7 +8,7 @@
 
 <% @movies.each do |m| %>
 <div id="<%=m[:title]%>">
-  <p>Title: <%=link_to "#{m[:title]}", user_movie_path(@user.id, m[:id]) %></p>
+  <p>Title: <%=link_to "#{m[:title]}", movie_path(m[:id]) %></p>
   <p>Vote Average: <%= m[:vote_average] %></p>
 </div>
 <% end %>

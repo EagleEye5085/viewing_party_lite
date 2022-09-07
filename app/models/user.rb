@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  enum role: %w[default manager admin]
+
   has_many :viewing_parties, dependent: :destroy
   has_many :viewing_party_users
   has_many :viewing_parties, through: :viewing_party_users

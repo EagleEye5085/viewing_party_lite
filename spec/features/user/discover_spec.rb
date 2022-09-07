@@ -4,7 +4,7 @@ RSpec.describe 'user discover page' do
   before :each do
     @user = User.create!(name: 'tom', email: 'tom@tom.com', password: "password123")
 
-    visit "/users/#{@user.id}/discover"
+    visit "/discover"
   end
 
 
@@ -12,7 +12,7 @@ RSpec.describe 'user discover page' do
     expect(page.status_code).to eq 200
     expect(page).to have_button('Top Rated Movies')
     click_button 'Top Rated Movies'
-    expect(current_path).to eq("/users/#{@user.id}/movies/index")
+    expect(current_path).to eq("/movies")
   end
 
   it 'has a movie search bar', :vcr do
@@ -20,7 +20,7 @@ RSpec.describe 'user discover page' do
     expect(page).to have_button('Search for movie')
     fill_in('name', with: 'mike')
     click_on 'Search for movies'
-    expect(current_path).to eq("/users/#{@user.id}/movies/index")
+    expect(current_path).to eq("/movies")
   end
 
 

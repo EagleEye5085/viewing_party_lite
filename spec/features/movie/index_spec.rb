@@ -4,7 +4,7 @@ RSpec.describe 'index movies page' do
   before :each do
     @user1 = User.create!(name: 'tom', email: 'tom.gmail.com', password: "password123")
 
-    visit "/users/#{@user1.id}/discover"
+    visit "/discover"
   end
 
   it "has a button to see top rated movies", :vcr do
@@ -12,7 +12,7 @@ RSpec.describe 'index movies page' do
     expect(page).to have_button('Top Rated Movies')
     click_button 'Top Rated Movies'
 
-    expect(current_path).to eq("/users/#{@user1.id}/movies/index")
+    expect(current_path).to eq("/movies")
 
   end
 
@@ -25,7 +25,7 @@ RSpec.describe 'index movies page' do
 
 
   it "is able to seach movies ", :vcr do
-    expect(current_path).to eq "/users/#{@user1.id}/discover"
+    expect(current_path).to eq "/discover"
 
     fill_in('name', with: 'tom')
 
@@ -36,7 +36,7 @@ RSpec.describe 'index movies page' do
   end
 
   it "is able to seach movies ", :vcr do
-    expect(current_path).to eq "/users/#{@user1.id}/discover"
+    expect(current_path).to eq "/discover"
 
     fill_in('name', with: 'happy')
 

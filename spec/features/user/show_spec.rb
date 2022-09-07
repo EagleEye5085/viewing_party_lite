@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe 'Create a New User' do
-  it "show be able to create a new user" do
+describe 'User show page' do
+  it "shows user data" do
 
     user = User.create!(name: "bob", email: "bob@gmail.com", password: "password123")
-    user1 = User.create!(name: "tom", email: "tom@gmail.com", password: "password123")
-
-    visit "/users/#{user.id}"
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    
+    visit user_path(user.id)
 
     expect(page).to have_content("bob")
     expect(page).to have_button("Discover Movies")

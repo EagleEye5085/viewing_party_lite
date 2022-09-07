@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'index movies page' do
   before :each do
-    @user1 = User.create!(name: 'tom', email: 'tom.gmail.com', password: "password123")
+    user = User.create!(name: 'tom', email: 'tom.gmail.com', password: "password123")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-    visit "/users/#{@user1.id}/discover"
+    visit "/discover"
 
     click_button 'Top Rated Movies'
 
