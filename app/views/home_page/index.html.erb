@@ -1,8 +1,11 @@
 <h1>Viewing Party Lite</h1>
 
-
+<% if current_user %>
+<%= button_to 'Log Out', session_path(current_user.id), method: :delete %>
+<% else %>
 <%= button_to 'Create New User', new_user_path, method: :get %>
 <%= button_to 'Log In', new_session_path, method: :get %>
+<% end %>
 
 <h2>Existing Users</h2>
 <% @users.map do |u| %>
