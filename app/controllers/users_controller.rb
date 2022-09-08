@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
+before_action :require_user, except: [:new, :create, :discover]
 
   def show
-
   end
 
   def discover
-
   end
 
   def new

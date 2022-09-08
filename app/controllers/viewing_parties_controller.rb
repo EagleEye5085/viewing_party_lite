@@ -1,9 +1,10 @@
 class ViewingPartiesController < ApplicationController
+before_action :require_user, except: [:create]
 
   def new
     # binding.pry
     @users = User.where("id != ?", params[:user])
-    @user = User.find(params[:user])
+    @user = current_user
     @movie = Movie.new(@search.find_movie_basic(params[:movie]), @search.find_movie_cast(params[:movie]), @search.find_movie_review(params[:movie]))
   end
 

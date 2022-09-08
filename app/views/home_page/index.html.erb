@@ -7,7 +7,9 @@
 <%= button_to 'Log In', new_session_path, method: :get %>
 <% end %>
 
-<h2>Existing Users</h2>
-<% @users.map do |u| %>
-  <%= link_to "#{u.name}'s dashboard", user_path(u) %>
+<% if current_user %>
+  <h2>Existing Users</h2>
+  <% @users.map do |u| %>
+    <%= u.email %>
+  <% end %>
 <% end %>

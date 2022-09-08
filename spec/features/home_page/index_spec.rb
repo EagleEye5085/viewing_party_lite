@@ -16,17 +16,34 @@ RSpec.describe 'home page index' do
     expect(page).to have_button('Create New User')
   end
 
-  it 'lists all users and whitch links to the users dashboard' do
-    expect(page).to have_link("tom's dashboard")
-    expect(page).to have_link("wes's dashboard")
+  it 'has a button to log in' do
+    expect(page).to have_button('Log In')
   end
 
   it 'has a link to the home page' do
     expect(page).to have_link("Home")
   end
 
-  it "is able not to show the emails" do
-    expect(page).to_not have_content("wes'ss dashboard")
-  end
+  it 'lists all users and whitch links to the users dashboard only when a user is logged in' do
+    expect(page).to_not have_link("tom.gmail.com")
+    expect(page).to_not have_link("wes.gmail.com")
 
+    user = User.create!(name: "bob", email: "bob@gmail.com", password: "password123")
+    visit new_session_path
+
+    expect(page).to have_content("User Log In")
+
+    fill_in :email, with: 'bob@gmail.com'
+    fill_in :password, with: 'password123'
+
+    click_button 'Log In'
+
+    expect(current_path).to eq user_path(User.last.id)
+
+    click_link "Home"
+
+    expect(page).to have_content("tom.gmail.com")
+    expect(page).to have_content("wes.gmail.com")
+  end
+  
 end

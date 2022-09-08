@@ -1,5 +1,5 @@
 <%=button_to 'Discover more movies', "/discover", method: :get%>
-<%= button_to 'Create a viewing party', new_viewing_party_path, method: :get, params: {user: current_user.id, movie: @movie.id} %>
+<%= button_to 'Create a viewing party', new_viewing_party_path, method: :get, params: {movie: @movie.id} %>
 
 
 <h1><%= @movie.title %></h1>
